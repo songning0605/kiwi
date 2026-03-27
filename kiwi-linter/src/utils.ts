@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import * as vscode from 'vscode';
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import * as slash from 'slash2';
+import slash from 'slash2';
 import * as globby from 'globby';
 import axios from 'axios';
 import { pinyin } from 'pinyin-pro';
@@ -292,9 +292,13 @@ export function getTargetLangPath(currentFilePath) {
  */
 export function getCurrentProjectLangPath() {
   let currentProjectLangPath = '';
-  const targetLangPath = getTargetLangPath(vscode.window.activeTextEditor.document.uri.path);
-  if (targetLangPath) {
-    currentProjectLangPath = `${targetLangPath}**/*.ts`;
+  try {
+    const targetLangPath = getTargetLangPath(vscode.window.activeTextEditor.document.uri.path);
+    if (targetLangPath) {
+      currentProjectLangPath = `${targetLangPath}**/*.ts`;
+    }
+  } catch (error) {
+    console.log(error);
   }
   return currentProjectLangPath;
 }

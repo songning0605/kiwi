@@ -13,6 +13,7 @@ import { triggerUpdateDecorations } from './chineseCharDecorations';
 import { LangSceneParam, TargetStr, TranslateAPiEnum } from './define';
 import { replaceAndUpdate } from './replaceAndUpdate';
 import { AutoImportI18NFixer } from './autoImportI18n';
+import { kiwiSearch } from './kiwiSearch/extension';
 import {
   findMatchKey,
   getConfiguration,
@@ -68,6 +69,8 @@ export function activate(context: vscode.ExtensionContext) {
       }
     });
   });
+
+  kiwiSearch(context);
 
   console.log('Congratulations, your extension "kiwi-linter" is now active!');
   context.subscriptions.push(vscode.commands.registerCommand('vscode-i18n-linter.findAllI18N', findAllI18N));

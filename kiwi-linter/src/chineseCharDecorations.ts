@@ -5,7 +5,7 @@
 import * as vscode from 'vscode';
 import { setLineDecorations } from './lineAnnotation';
 import { findChineseText } from './findChineseText';
-import * as minimatch from 'minimatch';
+import minimatch from 'minimatch';
 import { getConfiguration } from './utils';
 
 /**
@@ -15,7 +15,7 @@ function getChineseCharDecoration() {
   // 配置提示框样式
   const hasOverviewRuler = getConfiguration('showOverviewRuler');
   const shouldMark = getConfiguration('markStringLiterals');
-  const color = getConfiguration('markColor');
+  const color = getConfiguration('markColor') as string;
   return vscode.window.createTextEditorDecorationType({
     borderWidth: shouldMark ? '1px' : undefined,
     borderStyle: shouldMark ? 'dotted' : undefined,
